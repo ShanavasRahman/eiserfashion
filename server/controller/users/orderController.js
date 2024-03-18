@@ -198,7 +198,7 @@ const cancelOrder = async (req, res) => {
               }
 
               // Refund the wallet amount
-              refundAmount = walletTransaction.amount * -1;
+              refundAmount = order.amount * -1;
           }
 
           // Refund the amount to the user's wallet

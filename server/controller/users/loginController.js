@@ -238,7 +238,7 @@ const loadLogin = async (req, res) => {
 
 const loadSignup = async (req, res) => {
     try {
-        res.render("user/signup");
+        res.render("user/signUp");
     } catch (error) {
         console.log(error)
     }

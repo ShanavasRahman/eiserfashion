@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <title>Eiser ecommerce</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="vendors/linericon/style.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/themify-icons.css" />
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css" />
+    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css" />
+    <link rel="stylesheet" href="vendors/animate-css/animate.css" />
+    <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+
+  <body>
+    <!--================Header Menu Area =================-->
+    <%- include('partials/_header'); %>
+    <!--================Header Menu Area =================-->
+
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+              <h2>Cart</h2>
+              <p>Very us move be blessed multiply night</p>
+            </div>
+            <div class="page_link">
+              <a href="index.html">Home</a>
+              <a href="cart.html">Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+      <div class="container">
+        <div class="cart_inner">
+          <div class="table-responsive">
+            <% if (isCartEmpty) { %>
+              <h3 style="color: gray; padding: 20px 0px;">Your cart is empty. Add some products to your cart.</h3>
+              <a class="main_btn" href="/home">Continue Shopping</a>
+            <% } else { %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% user.cart.forEach(cartItem => { %>
+                  <tr>
+                    <td>
+                      <div class="media">
+                        <div class="d-flex">
+                          <% if (cartItem.product && cartItem.product.images && cartItem.product.images.length > 0) { %>
+                            <img src="<%= cartItem.product.images[0] %>" alt="" style="height: 100px; width: 100px;" />
+                          <% } else { %>
+                            <img src="https://via.placeholder.com/100" alt="Placeholder Image" style="height: 100px; width: 100px;" />
+                          <% } %>                        
+                        </div>
+                        <div class="media-body">
+                          <% if (cartItem.product) { %>
+                            <p><%= cartItem.product.name %></p>
+                          <% } else { %>
+                            <p>Product not available</p>
+                          <% } %>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <% if (cartItem.product) { %>
+                        <% if (cartItem.product.offerPrice) { %>
+                          <p><%= cartItem.product.offerPrice %></p>
+                        <% } else { %>
+                          <p><%= cartItem.product.price %></p>
+                        <% } %>
+                      <% } else { %>
+                        <p>Product not available</p>
+                      <% } %>
+                    </td>
+
+
+
+
+
+                    <td>
+                      <div class="product_count">
+                        <label for="qty">Quantity:</label>
+                        <input
+                          type="text"
+                          name="qty"
+                          id="qty_<%= cartItem.product._id %>"
+                          maxlength="12"
+                          value="<%= cartItem.quantity %>"
+                          title="Quantity:"
+                          class="input-text qty"
+                          readonly
+                        />
+                        <div>
+                          <button
+                            onclick="increaseQuantity('<%= cartItem.product._id %>', '<%= cartItem.product.stock %>');"
+                            class="increase items-count"
+                            type="button"
+                          >
+                            <i class="lnr lnr-chevron-up"></i>
+                          </button>
+                          <button
+                            onclick="decreaseQuantity('<%= cartItem.product._id %>');"
+                            class="reduced items-count"
+                            type="button"
+                          >
+                            <i class="lnr lnr-chevron-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+              
+
+
+
+
+                    
+                    <td>
+                      <h5 id="total_<%= cartItem.product._id %>">₹<%= cartItem.total %></h5>
+                    </td>
+                    <td >
+                      <button class="btn" onclick="removeProduct('<%= cartItem.product._id %>')" style="width: 100px; border-radius: 50px; background-color: rgb(204, 33, 33); color: white; font-size: 14px; ">Remove</button>
+                    </td>
+                  </tr>
+                <% }); %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h5>Subtotal</h5>
+                  </td>
+                  <td>
+                    <h5 id="totalCartAmountDisplay">₹<%= user.totalCartAmount %></h5>
+                  </td>
+                </tr>
+                
+                <tr class="out_button_area">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="checkout_btn_inner">
+                      <a class="gray_btn" href="/home">Continue Shopping</a>
+                      <a class="main_btn" href="/checkout?fromCart=true">Proceed to checkout</a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area section_gap">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Top Products</h4>
+            <ul>
+              <li><a href="#">Managed Website</a></li>
+              <li><a href="#">Manage Reputation</a></li>
+              <li><a href="#">Power Tools</a></li>
+              <li><a href="#">Marketing Service</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Jobs</a></li>
+              <li><a href="#">Brand Assets</a></li>
+              <li><a href="#">Investor Relations</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Features</h4>
+            <ul>
+              <li><a href="#">Jobs</a></li>
+              <li><a href="#">Brand Assets</a></li>
+              <li><a href="#">Investor Relations</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Guides</a></li>
+              <li><a href="#">Research</a></li>
+              <li><a href="#">Experts</a></li>
+              <li><a href="#">Agencies</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 single-footer-widget">
+            <h4>Newsletter</h4>
+            <p>You can trust us. we only send promo offers,</p>
+            <div class="form-wrap" id="mc_embed_signup">
+              <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                method="get" class="form-inline">
+                <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = 'Your Email Address '" required="" type="email">
+                <button class="click-btn btn btn-default">Subscribe</button>
+                <div style="position: absolute; left: -5000px;">
+                  <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                </div>
+  
+                <div class="info"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom row align-items-center">
+          <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          <div class="col-lg-4 col-md-12 footer-social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-behance"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--================ End footer Area  =================-->
+    
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  
+
+
+<script>
+  async function removeProduct(productId) {
+    try {
+      // Use SweetAlert for confirmation
+      const confirmed = await Swal.fire({
+        icon: 'question',
+        title: 'Are you sure?',
+        text: 'You are about to remove this product from the cart',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, remove it!',
+      });
+
+      if (!confirmed.isConfirmed) {
+        return;
+      }
+
+      const response = await fetch(`/removeProduct/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Error removing product from cart');
+      }
+
+      // Optionally, you can handle success or update the UI as needed
+      const responseData = await response.json();
+      console.log('Product removed successfully:', responseData);
+
+      // Optionally, refresh the page to reflect the updated cart
+      location.reload();
+    } catch (error) {
+      // Handle the error, such as displaying an alert to the user
+      console.error('Error removing product from cart:', error.message);
+    }
+  }
+</script>
+
+
+
+<script>
+async function updateCart(productId, newQuantity) {
+  try {
+    const response = await fetch(`/updateQuantity/${productId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ newQuantity }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error updating cart');
+    }
+
+    const responseData = await response.json();
+
+    // Update the total cart amount
+    const totalCartAmountElement = document.getElementById('totalCartAmountDisplay');
+    if (totalCartAmountElement) {
+      totalCartAmountElement.textContent = `₹${responseData.totalCartAmount}`;
+    }
+
+    // Update the individual product total and subtotal
+    responseData.cart.forEach(cartItem => {
+      const productTotalElement = document.getElementById(`total_${cartItem.product}`);
+      if (productTotalElement) {
+        productTotalElement.textContent = `₹${cartItem.total}`;
+      }
+
+      const productSubtotalElement = document.getElementById(`subtotal_${cartItem.product}`);
+      if (productSubtotalElement) {
+        productSubtotalElement.textContent = `₹${cartItem.subtotal}`;
+      }
+    });
+
+  } catch (error) {
+    console.error('Error updating cart:', error.message);
+  }
+}
+
+
+  function increaseQuantity(productId, productStock) {
+    var quantityInput = document.getElementById("qty_" + productId);
+    var currentQuantity = parseInt(quantityInput.value);
+
+    if (currentQuantity < productStock) {
+      quantityInput.value = currentQuantity + 1;
+      updateCart(productId, currentQuantity + 1);
+    } else {
+      alert("Sorry, there is not enough stock available.");
+    }
+  }
+
+  function decreaseQuantity(productId) {
+    var quantityInput = document.getElementById("qty_" + productId);
+    var currentQuantity = parseInt(quantityInput.value);
+
+    if (currentQuantity > 1) {
+      quantityInput.value = currentQuantity - 1;
+      updateCart(productId, currentQuantity - 1);
+    }
+  }
+</script>
+  
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="vendors/isotope/isotope-min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendors/counter-up/jquery.counterup.js"></script>
+    <script src="js/theme.js"></script>
+  </body>
+</html>

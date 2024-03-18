@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding: 20px;
+        }
+        .page-heading {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .return-home-button {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .order-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .order-card img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .order-details {
+            margin-top: 20px;
+        }
+        .order-status {
+            font-weight: bold;
+            color: #333;
+        }
+        .action-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="return-home-button">
+            <a href="/home" class="btn btn-primary"><i class="fas fa-home"></i> Return to Home</a>
+        </div>
+        <h1 class="page-heading">My Orders</h1>
+    
+        <% orders.forEach(order => { %>
+            <div class="order-card">
+                <div class="row">
+                    <% order.products.forEach((product, index) => { %>
+                        <div class="col-md-12">
+                            <div class="product-card">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="<%= product.product.images[0] %>" alt="Product Image">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h5><%= product.product.name %></h5>
+                                        <div class="order-details">
+                                            <p><span class="font-weight-bold">Name:</span> <%= order.deliveryAddress.name %></p>
+
+                                            <% if (order.returnRequested == 'Nil' && order.status !== 'Cancelled') { %>
+                                            <p><span class="font-weight-bold">Delivery Date:</span> <%= order.deliveryDate.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                                            <% } %>
+                                            <p><span class="font-weight-bold">Address:</span> <%= order.deliveryAddress.address %>, <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.country %></p>
+                                            <p><span class="font-weight-bold">Total Amount:</span> ₹<%= order.totalAmount %></p>
+                                            <p><span class="font-weight-bold">Order Status:</span> <span class="order-status"><%= order.status %></span></p>
+                                            <% if (product.returnRequested !== 'Nil' && order.status !== 'Cancelled') { %>
+                                                <p><span class="font-weight-bold">Return Request Status:</span> <%= order.returnRequested %></p>
+                                            <% } %>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <% if (order.status === 'Delivered' && order.returnRequested == 'Nil') { %>
+                                                <button class="btn btn-primary" onclick="returnOrder('<%= order._id %>')"><i class="fas fa-undo-alt"></i> Return Order</button>
+                                            <% } else { %>
+                                                <% if (order.status !== 'Cancelled' && order.returnRequested == 'Nil') { %>
+                                                    <button class="btn btn-danger" id="cancelOrderButton" onclick="cancelOrder('<%= order._id %>')"><i class="fas fa-times"></i> Cancel Order</button>
+                                                <% } %>
+                                            <% } %>
+                                            <a href="#" class="btn btn-info"><i class="fas fa-phone-alt"></i> Help</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% if (index !== order.products.length - 1) { %>
+                            <div class="col-md-12" style="margin-top: 50px;"></div>
+                        <% } %>
+                    <% }); %>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    
+    
+
+    <!-- SweetAlert library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function returnOrder(orderId) {
+            // Send a request to your backend API to initiate the return process
+            fetch('/returnReq', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ orderId: orderId })
+            })
+            .then(response => {
+                // Handle response
+                if (response.ok) {
+                    // Return successful, show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Return request submitted successfully!',
+                        showConfirmButton: false,
+                        timer: 2000 // Close after 2 seconds
+                    });
+                    setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                } else {
+                    // Extract error message from response body
+                    response.json().then(data => {
+                        // Show error message from backend in SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: data.message || 'Return request failed!',
+                            showConfirmButton: false,
+                            timer: 2000 // Close after 2 seconds
+                        });
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Show error message if fetch fails
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 2000 // Close after 2 seconds
+                });
+            });
+        }
+    </script>
+    
+    
+    
+    <script>
+        function cancelOrder(orderId) {
+            // Show a confirmation dialog using SweetAlert
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to cancel this order. This action cannot be undone!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, cancel it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // User confirmed the cancellation, proceed with the request
+                    fetch('/cancelOrder', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            orderId: orderId,
+                        }),
+                    })
+                    .then(response => {
+                        // Handle response
+                        if (response.ok) {
+                            // Parse response body as JSON
+                            return response.json();
+                        } else {
+                            // Request failed, throw an error to trigger the catch block
+                            throw new Error('Network response was not ok');
+                        }
+                    })
+                    .then(data => {
+    // Show success message with SweetAlert
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Order cancelled successfully!',
+                                showConfirmButton: false,
+                                timer: 2000 // Close after 2 seconds
+                            });
+                            
+                            // Reload the page after 2 seconds
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        })
+
+                    .catch(error => {
+                        // Handle fetch error
+                        console.error('Error:', error);
+                        // Show error message with SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            showConfirmButton: false,
+                            timer: 2000 // Close after 2 seconds
+                        });
+                    });
+                }
+            });
+        }
+    </script>
+    
+    
+</body>
+</html>

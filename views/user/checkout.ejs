@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <style>
+body{margin-top:20px;
+background-color: #f1f3f7;
+}
+
+.card {
+    margin-bottom: 24px;
+    -webkit-box-shadow: 0 2px 3px #e4e8f0;
+    box-shadow: 0 2px 3px #e4e8f0;
+}
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #eff0f2;
+    border-radius: 1rem;
+}
+.activity-checkout {
+    list-style: none
+}
+
+.activity-checkout .checkout-icon {
+    position: absolute;
+    top: -4px;
+    left: -24px
+}
+
+.activity-checkout .checkout-item {
+    position: relative;
+    padding-bottom: 24px;
+    padding-left: 35px;
+    border-left: 2px solid #f5f6f8
+}
+
+.activity-checkout .checkout-item:first-child {
+    border-color: #3b76e1
+}
+
+.activity-checkout .checkout-item:first-child:after {
+    background-color: #3b76e1
+}
+
+.activity-checkout .checkout-item:last-child {
+    border-color: transparent
+}
+
+.activity-checkout .checkout-item.crypto-activity {
+    margin-left: 50px
+}
+
+.activity-checkout .checkout-item .crypto-date {
+    position: absolute;
+    top: 3px;
+    left: -65px
+}
+
+
+
+.avatar-xs {
+    height: 1rem;
+    width: 1rem
+}
+
+.avatar-sm {
+    height: 2rem;
+    width: 2rem
+}
+
+.avatar {
+    height: 3rem;
+    width: 3rem
+}
+
+.avatar-md {
+    height: 4rem;
+    width: 4rem
+}
+
+.avatar-lg {
+    height: 5rem;
+    width: 5rem
+}
+
+.avatar-xl {
+    height: 6rem;
+    width: 6rem
+}
+
+.avatar-title {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #3b76e1;
+    color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%
+}
+
+.avatar-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 8px
+}
+
+.avatar-group .avatar-group-item {
+    margin-left: -8px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    -webkit-transition: all .2s;
+    transition: all .2s
+}
+
+.avatar-group .avatar-group-item:hover {
+    position: relative;
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px)
+}
+
+.card-radio {
+    background-color: #fff;
+    border: 2px solid #eff0f2;
+    border-radius: .75rem;
+    padding: .5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block
+}
+
+.card-radio:hover {
+    cursor: pointer
+}
+
+.card-radio-label {
+    display: block
+}
+
+.edit-btn {
+    width: 35px;
+    height: 35px;
+    line-height: 40px;
+    text-align: center;
+    position: absolute;
+    right: 25px;
+    margin-top: -50px
+}
+
+.card-radio-input {
+    display: none
+}
+
+.card-radio-input:checked+.card-radio {
+    border-color: #3b76e1!important
+}
+
+
+.font-size-16 {
+    font-size: 16px!important;
+}
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: none!important;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.47rem 0.75rem;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #545965;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e2e5e8;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.75rem;
+    -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+.edit-btn {
+    width: 35px;
+    height: 35px;
+    line-height: 40px;
+    text-align: center;
+    position: absolute;
+    right: 25px;
+    margin-top: -50px;
+}
+
+.ribbon {
+    position: absolute;
+    right: -26px;
+    top: 20px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 1px 22px;
+    font-size: 13px;
+    font-weight: 500
+}
+
+
+.coupon-section {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.coupon-section .input-group {
+    margin-bottom: 10px;
+}
+
+.coupon-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+.wallet-balance {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wallet-balance h5 {
+    color: #007bff;
+    margin-bottom: 0;
+}
+
+.wallet-options .custom-control-label {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.wallet-options .form-control {
+    border-radius: 5px;
+    border-color: #ced4da;
+}
+
+.wallet-options .btn-primary {
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xl-7">
+    
+                <div class="card">
+                    <div class="card-body">
+                        <ol class="activity-checkout mb-0 px-4 mt-3">
+                            <li class="checkout-item">
+                                <div class="avatar checkout-icon p-1">
+                                    <div class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bxs-receipt text-white font-size-20"></i>
+                                    </div>
+                                </div>
+                                <div class="feed-item-list">
+                                    <div>
+                                        <h5 class="font-size-16 mb-1">Billing Info</h5>
+                                        <p class="text-muted text-truncate mb-4"></p>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="row">
+                                                  <% address.forEach((address, index) => { %>
+                                                    <div class="col-lg-4 col-sm-6">
+                                                      <div data-bs-toggle="collapse">
+                                                        <label class="card-radio-label mb-0">
+                                                          <input type="radio" name="address" id="info-address<%= index + 1 %>" class="card-radio-input" value="<%= JSON.stringify(address) %>" <%= index === 0 ? 'checked' : '' %>>
+                                                          <div class="card-radio text-truncate p-3" style="height: 250px; overflow: hidden;">
+                                                            <span class="fs-14 mb-4 d-block"><%= address.label %></span>
+                                                            <span class="fs-14 mb-2 d-block"><%= address.name %></span>
+                                                            <span class="text-muted fw-normal text-wrap mb-1 d-block"><%= address.address %></span>
+                                                            <span class="text-muted fw-normal d-block"><%= address.phone %></span>
+                                                          </div>
+                                                        </label>
+                                                        <div class="edit-btn bg-light rounded">
+                                                          <a href="/profile" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+                                                            <i class="bx bx-pencil font-size-16" data-bs-toggle="modal" data-bs-target="#editModal<%= index + 1 %>"></i>
+                                                          </a>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  <% }); %>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="checkout-item">
+                                <div class="avatar checkout-icon p-1">
+                                    <div class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bxs-wallet-alt text-white font-size-20"></i>
+                                    </div>
+                                </div>
+                                <div class="feed-item-list">
+                                    <div>
+                                        <h5 class="font-size-16 mb-1">Payment Info</h5>
+                                        <p class="text-muted text-truncate mb-4"></p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-size-14 mb-3">Payment method :</h5>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div data-bs-toggle="collapse">
+                                                    <label class="card-radio-label">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input" value="Credit/Debit Card">
+                                                        <span class="card-radio py-3 text-center text-truncate">
+                                                            <i class="bx bx-credit-card d-block h2 mb-3"></i>
+                                                            Credit / Debit Card
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div>
+                                                    <label class="card-radio-label">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" value="Razorpay">
+                                                        <span class="card-radio py-3 text-center text-truncate">
+                                                            <i class="bx bxl-paypal d-block h2 mb-3"></i>
+                                                            Razorpay
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+    
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div>
+                                                    <label class="card-radio-label">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" value="Cash on Delivery" checked="">
+    
+                                                        <span class="card-radio py-3 text-center text-truncate">
+                                                            <i class="bx bx-money d-block h2 mb-3"></i>
+                                                            <span>Cash on Delivery</span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+    
+                <div class="row my-4">
+                    <div class="col">
+                        <a href="/home" class="btn btn-link text-muted">
+                            <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
+                    </div> <!-- end col -->
+                    <div class="col">
+                        <div class="text-end mt-2 mt-sm-0">
+                            <button class="btn btn-success" id="proceedButton">
+                                <i class="mdi mdi-cart-outline me-1"></i> Proceed
+                            </button>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row-->
+            </div>
+            
+            <div class="col-xl-5">
+                <div class="card checkout-order-summary">
+                    <div class="card-body">
+                        <div class="p-3 bg-light mb-3">
+                            <h5 class="font-size-16 mb-0">Order Summary</h5>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-centered mb-0 table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0" style="width: 110px;" scope="col">Product</th>
+                                        <th class="border-top-0" scope="col">Product Desc</th>
+                                        <th class="border-top-0" scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (fromCart) { %>
+                                        <!-- Display cart products when fromCart is true -->
+                                        <% cartProducts.forEach(function(cartItem) { %>
+                                            <tr data-product-id="<%= cartItem.product.id %>">
+                                                <th scope="row">
+                                                    <% if (cartItem.product && cartItem.product.images && cartItem.product.images[0]) { %>
+                                                        <img src="<%= cartItem.product.images[0] %>" alt="product-img" title="product-img" class="avatar-lg rounded">
+                                                    <% } else { %>
+                                                        <img src="placeholder-image.jpg" alt="placeholder" title="Placeholder" class="avatar-lg rounded">
+                                                    <% } %>
+                                                </th>
+                                                <td>
+                                                    <% if (cartItem.product) { %>
+                                                        <h5 class="font-size-16 text-truncate">
+                                                            <a href="#" class="text-dark">
+                                                                <%= cartItem.product.name || 'Product Name Not Available' %>
+                                                            </a>
+                                                        </h5>
+                                                        <p class="text-muted mb-0">
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star-half text-warning"></i>
+                                                        </p>
+                                                        <p class="text-muted mb-0 mt-1">
+                                                            ₹ <%= cartItem.product.price || 'Price Not Available' %>x<%= cartItem.quantity %>
+                                                        </p>
+                                                    <% } else { %>
+                                                        <p class="text-danger">Product Information Not Available</p>
+                                                        <!-- Display an error message or handle it based on your needs -->
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <!-- Display a single product when fromCart is false -->
+                                        <% if (cartProducts.length > 0) { %>
+                                            <% const cartItem = cartProducts[0]; %>
+                                            <tr data-product-id="<%= cartItem.product.id %>">
+                                                <th scope="row">
+                                                    <% if (cartItem.product && cartItem.product.images && cartItem.product.images[0]) { %>
+                                                        <img src="<%= cartItem.product.images[0] %>" alt="product-img" title="product-img" class="avatar-lg rounded">
+                                                    <% } else { %>
+                                                        <img src="placeholder-image.jpg" alt="placeholder" title="Placeholder" class="avatar-lg rounded">
+                                                    <% } %>
+                                                </th>
+                                                <td>
+                                                    <% if (cartItem.product) { %>
+                                                        <h5 class="font-size-16 text-truncate">
+                                                            <a href="#" class="text-dark">
+                                                                <%= cartItem.product.name || 'Product Name Not Available' %>
+                                                            </a>
+                                                        </h5>
+                                                        <p class="text-muted mb-0">
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star-half text-warning"></i>
+                                                        </p>
+                                                        <p class="text-muted mb-0 mt-1">
+                                                            ₹ <%= cartItem.product.offerPrice || cartItem.product.price || 'Price Not Available' %>x<%= cartItem.quantity %>
+                                                        </p>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if (cartItem.total) { %>
+                                                        ₹ <%= cartItem.total %>
+                                                    <% } else { %>
+                                                        <p class="text-danger">Total Price Not Available</p>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% } else { %>
+                                            <!-- Handle the case when no product is available -->
+                                            <tr>
+                                                <td colspan="3">No product found</td>
+                                            </tr>
+                                        <% } %>
+                                    <% } %>
+
+
+                                    <div class="input-group" style="height: 100px;">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Coupon
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-height: 300px; overflow-y: auto; min-width: 400px;">
+                                                <% coupons.forEach(coupon => { %>
+                                                    <div class="dropdown-item" style="font-size: 14px;">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div>
+                                                                <h5 class="mb-1">Coupon Code: <%= coupon.couponCode %></h5>
+                                                                <p class="mb-1">Discount Type: <%= coupon.discountType %></p>
+                                                                <p class="mb-1">Min. Purchase: ₹<%= coupon.minPurchaseAmount %></p>
+                                                                <small>Expires: <%= coupon.expirationTime.toDateString() %></small>
+                                                            </div>
+                                                            <button class="btn btn-sm btn-secondary copy-btn" data-coupon-code="<%= coupon.couponCode %>">Copy</button>
+                                                        </div>
+                                                    </div>
+                                                <% }); %>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Enter coupon code" id="couponCode">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" id="applyCouponButton" style="height: 37px;">Apply</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <!-- Wallet Section -->
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="font-size-16 mb-4">Wallet</h5>
+                                                    <!-- Display Wallet Balance -->
+                                                    <div class="wallet-balance">
+                                                        <p class="text-muted font-size-14 mb-2">Your Wallet Balance:</p>
+                                                        <h5 class="font-size-20">₹<%= user.wallet.balance %></h5>
+                                                    </div>
+                                                    <!-- Wallet Usage Options -->
+                                                    <div class="wallet-options mt-4">
+                                                        <div class="custom-control custom-checkbox mb-3">
+                                                            <input type="checkbox" class="custom-control-input" id="useWallet">
+                                                            <label class="custom-control-label" for="useWallet">Use Wallet Balance</label>
+                                                        </div>
+                                                        <!-- If using wallet is checked, show input for amount -->
+                                                        <div id="walletAmountInput" style="display: none;">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" placeholder="Enter Amount" id="walletAmount">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-primary" type="button" id="applyWalletButton">Apply</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+
+                                    
+
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="font-size-14 m-0">Total : </h5>
+                                        </td>
+                                        
+                                        <td id="totalAmount" data-original-amount="<%= fromCart ? user.totalCartAmount : cartProducts[0].total %>">
+                                            <% if (fromCart) { %>
+                                                ₹ <%= user.totalCartAmount %>
+                                            <% } else { %>
+                                                ₹ <%= cartProducts[0].total %>
+                                            <% } %>
+                                        </td>
+                                        
+                                        <!-- Add a div for displaying the price breakup -->
+                                        <div id="priceBreakup" style="display: none;">
+                                            <span id="couponApplied"></span>
+                                            <br>
+                                            <span id="discountedAmount"></span>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   
+   
+    <script>
+        // Function to handle the click event on the apply coupon button
+        async function applyCoupon() {
+            try {
+                // Disable the button to prevent multiple submissions
+                document.getElementById('applyCouponButton').disabled = true;
+    
+                // Remove the click event listener to prevent multiple submissions
+                document.getElementById('applyCouponButton').removeEventListener('click', applyCoupon);
+    
+                const couponCode = document.getElementById('couponCode').value.trim();
+                const totalAmountElement = document.getElementById('totalAmount');
+                const totalAmount = extractAndCalculateAmount(totalAmountElement.textContent);
+                const originalAmount = parseFloat(document.getElementById('totalAmount').dataset.originalAmount);
+
+    
+                // Prepare the request payload
+                const payload = {
+                    couponCode: couponCode,
+                    totalPurchaseAmount: totalAmount // Pass the total amount to the server
+                };
+    
+                // Send a POST request to the server to apply the coupon
+                const response = await fetch('/applyCoupon', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+    
+                // Check if the request was successful
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(errorMessage || 'Failed to apply coupon');
+                }
+    
+                const data = await response.json();
+                // Update the DOM with the discount amount and final amount
+                updateTotalAmount(data.finalAmount, data.discountAmount, originalAmount);
+            } catch (error) {
+                // Handle errors
+                showErrorAlert(error.message);
+                console.error('Error applying coupon:', error);
+            } finally {
+                // Enable the button after the request completes (whether success or failure)
+                document.getElementById('applyCouponButton').disabled = false;
+            }
+        }
+    
+        function showErrorAlert(message) {
+          let errorMessage;
+            try {
+            const errorObject = JSON.parse(message);
+            errorMessage = errorObject.error;
+             } catch (error) {
+                errorMessage = message;
+             }
+    
+    Swal.fire({
+        title: 'Error',
+        text: errorMessage,
+        icon: 'error',
+    });
+}
+
+    
+        document.getElementById('applyCouponButton').addEventListener('click', applyCoupon);
+    
+        function updateTotalAmount(finalAmount, discountAmount, originalAmount) {
+
+        const discountedAmount = originalAmount - discountAmount;
+
+        document.getElementById('totalAmount').textContent = `₹ ${finalAmount}`;
+
+        document.getElementById('priceBreakup').style.display = 'block';
+
+        document.getElementById('couponApplied').textContent = `Coupon Applied: ₹ ${discountAmount}`;
+
+        document.getElementById('discountedAmount').innerHTML = `<del>Original Amount: ₹ ${originalAmount}</del><br>Final Amount: ₹ ${finalAmount}`;
+        }
+    
+        // Function to extract and calculate the amount from a raw string
+        function extractAndCalculateAmount(rawString) {
+            const extractedValue = parseFloat(rawString.replace(/[^\d.]/g, ''));
+            return extractedValue;
+        };
+    </script>
+    
+    
+
+    <script>
+            document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+            const couponCode = this.getAttribute('data-coupon-code');
+            document.getElementById('couponCode').value = couponCode;
+    });
+});
+
+</script>
+
+<script>
+    var originalAmount = 0; // Declared in the global scope
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const useWalletCheckbox = document.getElementById('useWallet');
+        const walletAmountInput = document.getElementById('walletAmountInput');
+        const totalAmountTd = document.getElementById('totalAmount');
+        originalAmount = parseFloat(document.getElementById('totalAmount').textContent.match(/\d+/)[0]);
+
+        useWalletCheckbox.addEventListener('change', function() {
+            if (useWalletCheckbox.checked) {
+                walletAmountInput.style.display = 'block'; 
+                const walletBalance = '<%= user.wallet.balance %>'; 
+                document.getElementById('walletAmount').setAttribute('max', walletBalance); 
+            } else {
+                walletAmountInput.style.display = 'none'; 
+                totalAmountTd.textContent = '₹' + originalAmount;
+            }
+        });
+
+        const applyButton = document.getElementById('applyWalletButton');
+        applyButton.addEventListener('click', function() {
+    const walletAmount = parseFloat(document.getElementById('walletAmount').value);
+    const walletBalance = parseFloat('<%= user.wallet.balance %>');
+
+    if (walletAmount > 0 && walletAmount <= walletBalance) {
+        const newTotal = parseFloat(totalAmountTd.textContent.replace(/[^\d.]/g, '')) - walletAmount;
+        
+        if (newTotal < 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid wallet amount!',
+                text: 'The wallet amount exceeds the total.'
+            });
+        } else {
+            totalAmountTd.textContent = '₹' + newTotal.toFixed(2);
+        }
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid wallet amount!',
+            text: 'Please enter a valid wallet amount.'
+        });
+    }
+});
+
+    });
+
+    document.getElementById('proceedButton').addEventListener('click', function () {
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+    
+        // Function to show a SweetAlert
+        function showErrorAlert(title, text) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: 'error',
+            });
+        }
+    
+        var rawTotalAmount = document.getElementById('totalAmount').textContent;
+        var totalAmount = extractAndCalculateAmount(rawTotalAmount);
+    
+        var productIds = []; 
+    
+        // Check if fromCart is true or false
+        if (getQueryParam('fromCart') === 'true') {
+            // Loop through each product row and extract the product ID
+            document.querySelectorAll('tbody tr[data-product-id]').forEach(function (productRow) {
+                var productId = productRow.getAttribute('data-product-id');
+                productIds.push(productId);
+            });
+        } else {
+            // If fromCart is false, get product ID and quantity from query parameters
+            var productId = getQueryParam('productId');
+            var quantity = getQueryParam('quantity');
+    
+            if (!productId || !quantity) {
+                showErrorAlert('Error', 'Product ID or quantity missing in query parameters.');
+                return;
+            }
+    
+            // Add the product ID and quantity to the array
+            productIds.push({
+                product: productId,
+                quantity: quantity
+            });
+        }
+        var useWallet = document.getElementById('useWallet').checked;
+
+                var formData = {
+                originalAmount: originalAmount, // Pass the original amount
+                discountedAmount: totalAmount, // Pass the discounted amount
+                selectedAddress: JSON.parse(document.querySelector('input[name="address"]:checked').value),
+                paymentMethod: document.querySelector('input[name="pay-method"]:checked').value,
+                fromCart: getQueryParam('fromCart'),
+                products: productIds,
+                useWallet: useWallet,
+                walletAmount: parseFloat(document.getElementById('walletAmount').value) // Pass the wallet amount
+            };
+
+    
+        if (formData.paymentMethod === 'Razorpay') {
+            initiateRazorpayPayment(formData);
+        } else {
+            // Perform a POST request using the Fetch API for other payment methods
+            performOtherPayment(formData);
+        }
+    });
+
+    // Function to initiate Razorpay payment
+    function initiateRazorpayPayment(formData) {
+    console.log(typeof(formData.totalAmount));
+
+    // Check if the discounted amount is greater than zero
+    if (formData.discountedAmount > 0) {
+        const options = {
+            key: 'rzp_test_PnHJ4R80j0KB8r',
+            amount: formData.discountedAmount * 100,
+            currency: 'INR',
+            handler: function (response) {
+                // Check if the payment is successful
+                if (response.razorpay_payment_id) {
+                    // Include Razorpay payment ID in the form data
+                    formData.razorpayPaymentId = response.razorpay_payment_id;
+    
+                    // Send payment confirmation to the backend
+                    sendPaymentConfirmation(formData);
+                } else {
+                    // If not successful, handle accordingly
+                    console.error('Razorpay payment failed.');
+                }
+            },
+            theme: {
+                color: '#528FF0', 
+            },
+        };
+    
+        const rzp = new Razorpay(options);
+        rzp.open();
+    } else {
+        // Show SweetAlert indicating the amount is zero and proceed with cash on delivery
+        Swal.fire({
+            title: 'Amount is Zero',
+            text: 'Proceed with Cash on Delivery',
+            icon: 'info',
+            confirmButtonText: 'OK',
+           
+        });
+    }
+}
+
+
+    
+    function sendPaymentConfirmation(formData) {
+        fetch('/createOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data && data.error) {
+                console.error('Error during payment confirmation:', data.error);
+            } else {
+                console.log('Payment confirmation successful');
+                window.location.href = '/orderPlaced';
+            }
+        })
+        .catch(error => {
+            // Handle fetch errors
+            console.error('Error during payment confirmation:', error);
+        });
+    }
+    
+    function performOtherPayment(formData) {
+        fetch('/createOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data && data.error) {
+                if (data.error.startsWith('Product not found')) {
+                    showErrorAlert('Not available', 'Currently, the product is not available.');
+                } else {
+                    console.error('Error during form submission:', data.error);
+                }
+            } else {
+                window.location.href = '/orderPlaced';
+            }
+        })
+        .catch(error => {
+            showErrorAlert('Error', 'Error during form submission');
+            console.error('Error during form submission:', error);
+        });
+    }
+    
+    function extractAndCalculateAmount(rawString) {
+        var extractedValue = parseInt(rawString.match(/\d+/)[0], 10);
+        return extractedValue;
+    }
+</script>
+
+
+
+
+    
+        
+
+</body>
+    
+
+</html>

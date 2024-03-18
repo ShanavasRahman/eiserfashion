@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/vendors/feather/feather.css">
+  <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/images/favicon.png" />
+<!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+ body{
+    background-color: #f8f9fa!important
+}
+.p-4 {
+    padding: 1.5rem!important;
+}
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}    
+/* user-dashboard-info-box */
+.user-dashboard-info-box .candidates-list .thumb {
+    margin-right: 20px;
+}
+.user-dashboard-info-box .candidates-list .thumb img {
+    width: 80px;
+    height: 80px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.user-dashboard-info-box .title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.user-dashboard-info-box .candidates-list td {
+    vertical-align: middle;
+}
+
+.user-dashboard-info-box td li {
+    margin: 0 4px;
+}
+
+.user-dashboard-info-box .table thead th {
+    border-bottom: none;
+}
+
+.table.manage-candidates-top th {
+    border: 0;
+}
+
+.user-dashboard-info-box .candidate-list-favourite-time .candidate-list-favourite {
+    margin-bottom: 10px;
+}
+
+.table.manage-candidates-top {
+    min-width: 650px;
+}
+
+.user-dashboard-info-box .candidate-list-details ul {
+    color: #969696;
+}
+
+/* Candidate List */
+.candidate-list {
+    background: #ffffff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #eeeeee;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.candidate-list:hover {
+    -webkit-box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+    box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+    position: relative;
+    z-index: 99;
+}
+.candidate-list:hover a.candidate-list-favourite {
+    color: #e74c3c;
+    -webkit-box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+    box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+}
+
+.candidate-list .candidate-list-image {
+    margin-right: 25px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 80px;
+    flex: 0 0 80px;
+    border: none;
+}
+.candidate-list .candidate-list-image img {
+    width: 80px;
+    height: 80px;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.candidate-list-title {
+    margin-bottom: 5px;
+}
+
+.candidate-list-details ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 0px;
+}
+.candidate-list-details ul li {
+    margin: 5px 10px 5px 0px;
+    font-size: 13px;
+}
+
+.candidate-list .candidate-list-favourite-time {
+    margin-left: auto;
+    text-align: center;
+    font-size: 13px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 90px;
+    flex: 0 0 90px;
+}
+.candidate-list .candidate-list-favourite-time span {
+    display: block;
+    margin: 0 auto;
+}
+.candidate-list .candidate-list-favourite-time .candidate-list-favourite {
+    display: inline-block;
+    position: relative;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border: 1px solid #eeeeee;
+    border-radius: 100%;
+    text-align: center;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #646f79;
+}
+.candidate-list .candidate-list-favourite-time .candidate-list-favourite:hover {
+    background: #ffffff;
+    color: #e74c3c;
+}
+
+.candidate-banner .candidate-list:hover {
+    position: inherit;
+    -webkit-box-shadow: inherit;
+    box-shadow: inherit;
+    z-index: inherit;
+}
+
+.bg-white {
+    background-color: #ffffff !important;
+}
+.p-4 {
+    padding: 1.5rem!important;
+}
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.user-dashboard-info-box .candidates-list .thumb {
+    margin-right: 20px;
+}
+.unblocked {
+            width: 100px; /* Set a fixed width for the button */
+            background-color: #FF2400;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 13px;
+            border-color: white;
+        }
+.blocked {
+            width: 100px; /* Set a fixed width for the button */
+            background-color: rgb(70, 109, 55);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 13px;
+            border-color: white;
+        }
+
+
+
+        /* Add this to your existing CSS or create a new CSS section */
+.modal {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #d8d8d8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Style the confirm button */
+#confirmBtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#confirmBtn:hover {
+  background-color: #45a049;
+}
+
+
+/* Your existing styles for other elements */
+
+
+    </style>
+
+
+
+</head>
+
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <%- include('partials/_navbar'); %>   
+       <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="ti-settings"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close ti-close"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+            <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default"></div>
+            </div>
+          </div>
+        </div>
+        <div id="right-sidebar" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="setting-content">
+            <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+              <div class="add-items d-flex px-3 mb-0">
+                <form class="form w-100">
+                  <div class="form-group d-flex">
+                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                    <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                  </div>
+                </form>
+              </div>
+              <div class="list-wrapper px-3">
+                <ul class="d-flex flex-column-reverse todo-list">
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Team review meeting at 3.00 PM
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Prepare for presentation
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Resolve all the low priority tickets due today
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li class="completed">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox" checked>
+                        Schedule meeting for next week
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li class="completed">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox" checked>
+                        Project review
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                </ul>
+              </div>
+              <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
+              <div class="events pt-4 px-3">
+                <div class="wrapper d-flex mb-2">
+                  <i class="ti-control-record text-primary mr-2"></i>
+                  <span>Feb 11 2018</span>
+                </div>
+                <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+                <p class="text-gray mb-0">The total number of sessions</p>
+              </div>
+              <div class="events pt-4 px-3">
+                <div class="wrapper d-flex mb-2">
+                  <i class="ti-control-record text-primary mr-2"></i>
+                  <span>Feb 7 2018</span>
+                </div>
+                <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                <p class="text-gray mb-0 ">Call Sarah Graves</p>
+              </div>
+            </div>
+            <!-- To do section tab ends -->
+            <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+              <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+                <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
+              </div>
+              <ul class="chat-list">
+                <li class="list active">
+                  <div class="profile"><img src="/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Thomas Douglas</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">19 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                  <div class="info">
+                    <div class="wrapper d-flex">
+                      <p>Catherine</p>
+                    </div>
+                    <p>Away</p>
+                  </div>
+                  <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                  <small class="text-muted my-auto">23 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Daniel Russell</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">14 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                  <div class="info">
+                    <p>James Richardson</p>
+                    <p>Away</p>
+                  </div>
+                  <small class="text-muted my-auto">2 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Madeline Kennedy</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">5 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Sarah Graves</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">47 min</small>
+                </li>
+              </ul>
+            </div>
+            <!-- chat tab ends -->
+          </div>
+        </div>
+        <!-- partial -->
+  
+  
+  
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('partials/_sidebar'); %>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+
+
+
+    <div class="container mt-3 mb-4">
+        <div class="col-lg-9 mt-4 mt-lg-0" style="display: contents;">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                  <table class="table manage-candidates-top mb-0" style="padding: 0.5rem 3.5rem;">
+                    <thead>
+                      <tr>
+                        <th class="text-center" style="background-color: #00008B; color: #ffffff;">User</th>
+                        <th class="text-center" style="background-color: #00008B; color: #ffffff;">Email</th>
+                        <th class="text-center" style="background-color: #00008B; color: #ffffff;">Status</th>
+                        <th class="action text-right" style="display: flex; justify-content: end; padding-right: 18px; background-color: #00008B; color: #ffffff;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% const usersPerPage = 3; %>
+                      <% const totalPages = Math.ceil(users.length / usersPerPage); %>
+                      <% const currentPage = parseInt(req.query.page, 10) || 1; %>
+                      <% const startIndex = (currentPage - 1) * usersPerPage; %>
+                      <% const endIndex = startIndex + usersPerPage; %>
+                
+                      <% const displayedUsers = users.slice(startIndex, endIndex); %>
+                
+                      <% displayedUsers.forEach(user => { %>
+                        <tr class="candidates-list">
+                          <td class="text-center">
+                            <div class="candidate-list-details">
+                              <div class="candidate-list-info">
+                                <div class="candidate-list-title">
+                                  <h5 class="mb-0 " style="color: #133556;"><%= user.name %></h5>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="candidate-list-favourite-time text-center">
+                            <span class="candidate-list-time order-1"><%= user.email %></span>
+                          </td>
+                          <td class="candidate-list-favourite-time text-center" style="width: 100px;">
+                            <span class="candidate-list-time order-1 status <%= user.is_block ? 'inactive' : 'active' %>" style="font-weight: 700;">
+                              <%= user.is_blocked ? 'Inactive' : 'Active' %>
+                            </span>
+                          </td>
+                          <% if (user.is_blocked) { %>
+                            <td style="display: flex; justify-content: end;">
+                              <button class="blockButton blocked" data-user-id="<%= user._id %>">UNBLOCK</button>
+                            </td>
+                          <% } else { %>
+                            <td style="display: flex; justify-content: end;">
+                              <button class="blockButton unblocked" data-user-id="<%= user._id %>">BLOCK</button>
+                            </td>
+                          <% } %>
+                        </tr>
+                      <% }); %>
+                
+                      <% if (message) { %>
+                        <tr class="candidates-list">
+                          <td class="text-center">
+                            <div class="candidate-list-details">
+                              <div class="candidate-list-info">
+                                <div class="candidate-list-title">
+                                  <h5 class="mb-0 " style="color: #133556;"><%= message %></h5>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <% for (let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                          <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                        </li>
+                      <% } %>
+                    </ul>
+                  </nav>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+          <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p style="font-weight: 600; font-size: 14px;" id="confirmationMessage">Are you sure?</p>
+              <button id="confirmBtn">Confirm</button>
+            </div>
+          </div>
+        </div>
+
+        <script src="/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/vendors/chart.js/Chart.min.js"></script>
+  <!-- <script src="/vendors/datatables.net/jquery.dataTables.js"></script> -->
+  <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="/js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/js/off-canvas.js"></script>
+  <script src="/js/hoverable-collapse.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/settings.js"></script>
+  <script src="/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/Chart.roundedBarCharts.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const blockButtons = document.querySelectorAll('.blockButton');
+
+    try {
+      const blockUser = async (userId) => {
+        try {
+          const blockEndpoint = '/admin/blockUser';
+          const response = await fetch(blockEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId }),
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            // Toggle between blocked and unblocked states
+            blockButtons.forEach((blockButton) => {
+              if (blockButton.getAttribute('data-user-id') === userId) {
+                if (data.isBlocked) {
+                  blockButton.classList.remove('unblocked');
+                  blockButton.classList.add('blocked');
+                  blockButton.innerText = 'UNBLOCK';
+
+                  // Update the text in the corresponding status column
+                  const statusSpan = blockButton.closest('tr').querySelector('.status');
+                  statusSpan.innerText = 'Inactive';
+                } else {
+                  blockButton.classList.remove('blocked');
+                  blockButton.classList.add('unblocked');
+                  blockButton.innerText = 'BLOCK';
+
+                  // Update the text in the corresponding status column
+                  const statusSpan = blockButton.closest('tr').querySelector('.status');
+                  statusSpan.innerText = 'Active';
+                }
+              }
+            });
+          } else {
+            console.error('Error blocking/unblocking user:', data.error);
+          }
+        } catch (error) {
+          console.error('Error blocking/unblocking user', error);
+        }
+      };
+
+      // Iterate through each button to add event listeners
+      blockButtons.forEach((blockButton) => {
+        blockButton.addEventListener('click', async () => {
+          const userId = blockButton.getAttribute('data-user-id');
+
+          // Set the confirmation message based on the button state
+          const isBlocked = blockButton.classList.contains('blocked');
+          const confirmationMessage = isBlocked
+            ? 'Are you sure you want to unblock this user?'
+            : 'Are you sure you want to block this user?';
+
+          // Ask for confirmation using Swal.fire
+          const result = await Swal.fire({
+            title: 'Confirmation',
+            text: confirmationMessage,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed!'
+          });
+
+          if (result.isConfirmed) {
+            // Call the blockUser function if the user confirms
+            await blockUser(userId);
+          }
+        });
+      });
+    } catch (error) {
+      console.error('Error initializing block buttons:', error);
+    }
+  });
+</script>
+  
+  
+</html>

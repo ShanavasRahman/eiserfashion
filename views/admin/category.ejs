@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Skydash Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../public/vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../public/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../public/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../public/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="../../public/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../public/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../public/images/favicon.png" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* styles.css */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(216, 213, 213);
+            padding: 50px;
+            text-align: center;
+            width: 400px;
+            height: 300px;
+        }
+
+        table{
+            margin-top: 50px;
+        }
+        table thead th{
+            width: 100px !important;
+        }
+
+
+        /* Styles for the offer cell */
+.offer-cell {
+  width: 200px;
+  position: relative; /* Ensures that the button is positioned relative to the cell */
+}
+
+/* Styles for the select dropdown */
+.offer-select {
+  width: 100%; /* Makes the select fill the entire width of the cell */
+  padding: 5px; /* Adds some padding for better appearance */
+  border: 1px solid #ccc; /* Adds a border to the select */
+  border-radius: 5px; /* Rounds the corners */
+}
+
+/* Styles for the "Apply" button */
+.apply-offer-button {
+  position: absolute; /* Positions the button relative to the cell */
+  top: 50%; /* Positions the button vertically centered */
+  right: 5px; /* Positions the button 5px from the right edge of the cell */
+  transform: translateY(-50%); /* Centers the button vertically */
+  padding: 5px 10px; /* Adds padding */
+  border: none; /* Removes the border */
+  border-radius: 5px; /* Rounds the corners */
+  background-color: #007bff; /* Sets the background color */
+  color: #fff; /* Sets the text color */
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
+}
+
+/* Styles for the "Apply" button on hover */
+.apply-offer-button:hover {
+  background-color: #0056b3; /* Darkens the background color on hover */
+}
+
+    .remove-offer-button {
+        background-color: #fff; /* Button background color */
+        border: none; /* Remove border */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        outline: none; /* Remove outline */
+    }
+
+    .remove-offer-button:hover {
+        color: #E34724; /* Change text color on hover */
+    }
+</style>
+
+    </style>
+
+</head>
+<body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <%- include('partials/_navbar'); %>   
+       <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="ti-settings"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close ti-close"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+            <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default"></div>
+            </div>
+          </div>
+        </div>
+        <div id="right-sidebar" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="setting-content">
+            <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+              <div class="add-items d-flex px-3 mb-0">
+                <form class="form w-100">
+                  <div class="form-group d-flex">
+                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                    <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                  </div>
+                </form>
+              </div>
+              <div class="list-wrapper px-3">
+                <ul class="d-flex flex-column-reverse todo-list">
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Team review meeting at 3.00 PM
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Prepare for presentation
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Resolve all the low priority tickets due today
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li class="completed">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox" checked>
+                        Schedule meeting for next week
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li class="completed">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox" checked>
+                        Project review
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                </ul>
+              </div>
+              <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
+              <div class="events pt-4 px-3">
+                <div class="wrapper d-flex mb-2">
+                  <i class="ti-control-record text-primary mr-2"></i>
+                  <span>Feb 11 2018</span>
+                </div>
+                <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+                <p class="text-gray mb-0">The total number of sessions</p>
+              </div>
+              <div class="events pt-4 px-3">
+                <div class="wrapper d-flex mb-2">
+                  <i class="ti-control-record text-primary mr-2"></i>
+                  <span>Feb 7 2018</span>
+                </div>
+                <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                <p class="text-gray mb-0 ">Call Sarah Graves</p>
+              </div>
+            </div>
+            <!-- To do section tab ends -->
+            <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+              <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+                <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
+              </div>
+              <ul class="chat-list">
+                <li class="list active">
+                  <div class="profile"><img src="/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Thomas Douglas</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">19 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                  <div class="info">
+                    <div class="wrapper d-flex">
+                      <p>Catherine</p>
+                    </div>
+                    <p>Away</p>
+                  </div>
+                  <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                  <small class="text-muted my-auto">23 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Daniel Russell</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">14 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                  <div class="info">
+                    <p>James Richardson</p>
+                    <p>Away</p>
+                  </div>
+                  <small class="text-muted my-auto">2 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Madeline Kennedy</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">5 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Sarah Graves</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">47 min</small>
+                </li>
+              </ul>
+            </div>
+            <!-- chat tab ends -->
+          </div>
+        </div>
+        <!-- partial -->
+  
+  
+  
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('partials/_sidebar'); %>
+        <!-- partial -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="main-panel">
+          <div class="content-wrapper">
+
+<!-- Button to show the overlay -->
+<button id="show-overlay-button" style="width: 200px; border: none; border-radius: 30px; background-color: #5D3FD3; color: white; padding: 10px;margin-top: 50px;margin-left: 30px;">Add Category</button>
+
+<% if (categories.length > 0) { %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center" style="background-color: #00008B; color: #ffffff;">SI.NO</th>
+                <th class="text-center" style="background-color: #00008B; color: #ffffff;">Category</th>
+                <th class="text-center" style="background-color: #00008B; color: #ffffff;">Total Products</th>
+                <th class="text-center" style="background-color: #00008B	; color: #ffffff;">Edit / Delete</th>
+                <th class="text-center" style="background-color: #00008B	; color: #ffffff;">Apply Offer</th>
+                <th class="text-center" style="background-color: #00008B	; color: #ffffff;">Remove Offer</th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach((category, index) => { %>
+                <tr>
+                    <td class="text-center"><%= index + 1 %></td>
+                    <td class="text-center"><%= category.name %></td>
+                    <td class="text-center"><%= category.productCount %></td>
+                    <td style="width: 50px;" class="text-center">
+
+                     
+
+                      <input type="hidden" id="categoryIdInput" data-category-name="<%= category.name %>" name="categoryId" value="<%= category._id %>">
+
+                      <button type="button" class="edit-button" title="Edit" data-toggle="tooltip" onclick="openEditOverlay('<%= category.name %>','<%= category._id %>')">
+                        <i class="material-icons" style="color: #FFC107; padding: 0px 10px;">&#xE254;</i>
+                      </button>
+                      
+                      
+                      
+                      
+
+
+
+                    <form id="deleteCategoryForm_<%= category._id %>" action="/admin/deleteCategory" method="POST" onsubmit="event.preventDefault(); deleteCategory(this)" style="padding-top: 20px;">
+                        <input type="hidden" name="categoryId" value="<%= category._id %>">
+                        <button type="submit" class="delete" title="Delete" data-toggle="tooltip">
+                            <i class="material-icons" style="color: #E34724; padding: 0px 10px;">&#xE872;</i>
+                        </button>
+                    </form>
+                    
+                    </td>
+                    <td class="offer-cell">
+                      <form id="applyOfferForm_<%= index %>" action="/admin/applyCategoryOffer" method="POST" onsubmit="applyOffer(event, '<%= category._id %>', document.getElementById('offerSelect_<%= index %>').value)">
+                          <select class="offer-select" name="offerId" id="offerSelect_<%= index %>">
+                              <% offers.forEach(offer => { %>
+                                  <option value="<%= offer._id %>"><%= offer.description %></option>
+                              <% }); %>
+                          </select>
+                          <input type="hidden" name="categoryId" value="<%= category._id %>">
+                          <button class="apply-offer-button" type="submit">Apply</button>
+                      </form>
+                  </td>
+                  
+                  
+                  <td style="width: 50px;" class="text-center">
+                    <form id="removeOfferForm_<%= category._id %>" action="/admin/removeCategoryOffer" method="POST" onsubmit="event.preventDefault();">
+                        <input type="hidden" name="categoryId" value="<%= category._id %>">
+                        <button type="button" class="remove-offer-button" onclick="removeOffer('<%= category._id %>')" title="Remove Offer" data-toggle="tooltip">
+                            <i class="material-icons" style="color: #E34724;">remove_circle_outline</i>
+                        </button>
+                    </form>
+                </td>
+                          
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %>
+    <h5 class="mb-0" style="color: #133556; padding: 50px;"><%= message %></h5>
+<% } %>
+
+
+
+
+
+
+
+
+<!-- overlay content goes here -->
+<div id="overlay">
+  <div id="overlay-content">
+    <h3 id="overlay-title" style="font-family: sans-serif; margin-bottom:  30px; letter-spacing:  5px; font-weight:  700;">ADD CATEGORY</h3>
+    <form action="/admin/addCategory" id="overlay-form" method="post" onsubmit="return validateInput()">
+      <input type="text" id="category" autocomplete="off" name="category" required style="width: 250px; height: 30px; margin: 10px 0px; border-radius: 50px; padding: 10px; border-color: white;">
+      <span id="validation-message" style="color: red;"></span>
+      <br>
+      <input type="submit" id="submit-button" value="Add Category" style="margin:  10px  0px; background-color: #5D3FD3; color: white; border-radius:  30px; border: none; padding:  10px;">
+    </form>
+    <button id="close-button" style="background-color: #5D3FD3; color: white; border-radius: 30px; border: none; padding: 10px; font-size: 12px;">Cancel</button>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form to edit category -->
+        <form id="editCategoryForm">
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter Category Name">
+          </div>
+          <!-- Hidden input field to hold the category ID -->
+          <input type="hidden" id="categoryId" name="categoryId">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Edit category-->
+
+          </div>
+        </div>
+<!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/vendors/chart.js/Chart.min.js"></script>
+  <!-- <script src="/vendors/datatables.net/jquery.dataTables.js"></script> -->
+  <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="/js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/js/off-canvas.js"></script>
+  <script src="/js/hoverable-collapse.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/settings.js"></script>
+  <script src="/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+  <script>
+    function removeOffer(categoryId) {
+        // Display confirmation dialog with SweetAlert
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action will remove the offer from the category and its products.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remove it',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // User confirmed, proceed with removal
+                fetch('/admin/removeCategoryOffer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ categoryId: categoryId })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to remove offer');
+                    }
+                    return response.json(); // Assuming server sends JSON response
+                })
+                .then(data => {
+                    if (!data.success) {
+                        throw new Error(data.error); // Handle error from server
+                    }
+                    // Show SweetAlert for success
+                    Swal.fire({
+                        title: 'Success',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                })
+                .catch(error => {
+                    // Show SweetAlert for error
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            }
+        });
+    }
+</script>
+
+
+
+<script>
+  function applyOffer(event, categoryId, offerId) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Display confirmation dialog with SweetAlert
+      Swal.fire({
+          title: 'Are you sure?',
+          text: 'This action will apply the selected offer to the category.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, apply offer',
+          cancelButtonText: 'Cancel'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              // User confirmed, proceed with applying the offer
+              // Send a POST request to the server
+              fetch('/admin/applyCategoryOffer', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ categoryId, offerId })
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Failed to apply offer');
+                  }
+                  return response.json(); // Assuming server sends JSON response
+              })
+              .then(data => {
+                  if (!data.success) {
+                      throw new Error(data.error); // Handle error from server
+                  }
+                  // Show SweetAlert for success
+                  Swal.fire({
+                      title: 'Success',
+                      text: data.message,
+                      icon: 'success',
+                      confirmButtonText: 'OK'
+                  });
+              })
+              .catch(error => {
+                  // Show SweetAlert for error
+                  Swal.fire({
+                      title: 'Error',
+                      text: error.message,
+                      icon: 'error',
+                      confirmButtonText: 'OK'
+                  });
+              });
+          }
+      });
+  }
+</script>
+
+
+
+  <script>
+    document.getElementById('overlay-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+    
+      // Get the category name from the input field
+      const categoryName = document.getElementById('category').value.trim();
+    
+      // Make a fetch request to submit the form data
+      fetch('/admin/addCategory', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ category: categoryName })
+      })
+      .then(response => {
+        if(response.ok){
+          return response.json(); // Parse response body as JSON
+        } else {
+          throw new Error('Network response was not ok.'); // Throw an error for non-ok responses
+        }
+      })
+      .then(data => {
+        // Show success message using SweetAlert
+        Swal.fire({
+          title: 'Success!',
+          text: data.message,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          // Redirect or perform any other action as needed
+          if (result.isConfirmed) {
+            // Reload the page
+            window.location.reload();
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Show error message using SweetAlert
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error: ' + error.message,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
+    });
+  </script>
+
+<script>
+  function openEditOverlay(categoryName, categoryId) {
+    document.getElementById('categoryId').value = categoryId; 
+    document.getElementById('categoryName').value = categoryName; 
+    $('#editCategoryModal').modal('show'); 
+  }
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('editCategoryForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      
+      const categoryId = document.getElementById('categoryId').value;
+      const categoryName = document.getElementById('categoryName').value;
+      
+      
+      fetch('/admin/updateCategory', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ category: categoryName, id:categoryId })
+      })
+      .then(response => {
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error('Form submission failed');
+  }
+})
+.then(data => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text: data.message // assuming your server sends back a JSON object with a 'message' property
+  }).then(() => {
+    location.reload();
+  });
+})
+.catch(error => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: error.message
+  });
+});
+
+
+    });
+  });
+  </script>
+  
+  
+  
+  
+  
+    
+
+
+
+
+  <script>
+    function removeCategoryOffer(categoryId) {
+        // Display a SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Remove Offer',
+            text: 'Are you sure you want to remove the offer for this category?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user confirms, submit the form to remove the offer
+                document.getElementById(`removeOfferForm_${categoryId}`).submit();
+            }
+        });
+    }
+</script>
+
+  
+
+
+<script>
+  function deleteCategory(form) {
+    // Use Swal.fire for confirmation
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If the user confirms, submit the form associated with the delete button
+            form.submit();
+        }
+    });
+}
+</script>
+
+
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const showOverlayButton = document.getElementById('show-overlay-button');
+    const overlayContent = document.getElementById('overlay-content');
+    const categoryInput = document.getElementById('category');
+    const validationMessage = document.getElementById('validation-message');
+
+    function showOverlay() {
+        overlay.style.display = 'block';
+    }
+
+    function hideOverlay() {
+        overlay.style.display = 'none';
+        // Clear validation message when hiding the overlay
+        validationMessage.textContent = '';
+    }
+
+    function validateInput() {
+    const categoryValue = categoryInput.value.trim();
+
+    // Check if the input is empty or contains only spaces or special symbols
+    if (categoryValue === '' || /^[\s\W]+$/.test(categoryValue)) {
+        validationMessage.textContent = 'Please enter a valid category name.';
+        return false;
+    }
+
+    // Check if the input contains any numbers
+    if (/\d/.test(categoryValue)) {
+        validationMessage.textContent = 'Category name cannot contain numbers.';
+        return false;
+    }
+
+    // Check if the input contains only spaces or special symbols
+    if (/^[\s\W]+$/.test(categoryValue)) {
+        validationMessage.textContent = 'Category name cannot consist of only spaces or special symbols.';
+        return false;
+    }
+
+    // You can add more validation rules if needed
+
+    // Clear validation message if validation passes
+    validationMessage.textContent = '';
+
+    return true;
+}
+
+    // Trigger the overlay when the button is clicked
+    showOverlayButton.addEventListener('click', showOverlay);
+
+    // Hide the overlay after clicking the close button
+    const closeButton = document.getElementById('close-button');
+    closeButton.addEventListener('click', hideOverlay);
+
+    // Close the overlay when clicking outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            hideOverlay();
+        }
+    });
+
+    // Prevent clicks inside the overlay content from closing it
+    overlayContent.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Skydash Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/vendors/feather/feather.css">
+  <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/images/favicon.png" />
+<!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+  /* Add this style to your HTML or in your CSS file */
+  a.edit:hover i.material-icons {
+    color: #42413e !important;
+    cursor: pointer;
+  }
+
+  a.delete:hover i.material-icons {
+    color: #42413e !important;
+    cursor: pointer;
+
+  }
+  .description-cell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    max-height: 600px !important;
+  }
+</style>
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <%- include('partials/_navbar'); %>   
+     <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Team review meeting at 3.00 PM
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Prepare for presentation
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Resolve all the low priority tickets due today
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Schedule meeting for next week
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Project review
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+              </ul>
+            </div>
+            <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary mr-2"></i>
+                <span>Feb 11 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+              <p class="text-gray mb-0">The total number of sessions</p>
+            </div>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary mr-2"></i>
+                <span>Feb 7 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+              <p class="text-gray mb-0 ">Call Sarah Graves</p>
+            </div>
+          </div>
+          <!-- To do section tab ends -->
+          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
+            </div>
+            <ul class="chat-list">
+              <li class="list active">
+                <div class="profile"><img src="/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Thomas Douglas</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">19 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="info">
+                  <div class="wrapper d-flex">
+                    <p>Catherine</p>
+                  </div>
+                  <p>Away</p>
+                </div>
+                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                <small class="text-muted my-auto">23 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Daniel Russell</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">14 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="info">
+                  <p>James Richardson</p>
+                  <p>Away</p>
+                </div>
+                <small class="text-muted my-auto">2 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Madeline Kennedy</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">5 min</small>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>Sarah Graves</p>
+                  <p>Available</p>
+                </div>
+                <small class="text-muted my-auto">47 min</small>
+              </li>
+            </ul>
+          </div>
+          <!-- chat tab ends -->
+        </div>
+      </div>
+      <!-- partial -->
+
+
+
+      <!-- partial:partials/_sidebar.html -->
+      <%- include('partials/_sidebar'); %>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+   <div class="content-wrapper">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Products</h4>
+            <button style="background-color: #5D3FD3; border-radius: 25px; padding: 5px 20px; margin-top: 30px; margin-bottom: 25px; border-color: white;">
+              <a href="/admin/addproducts" style="text-decoration: none; color: white;">Add products</a>
+            </button>
+            <p class="text-center" style="color: red;"><% if (typeof message !== 'undefined') { %>
+              <%= message %>
+            <% } %></p>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">SI.NO</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Product name</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Category</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Brand</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Stock</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Price</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Description</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Image</th>
+                    <th class="text-center" style="background-color: #00008B ; color: #ffffff;">Edit / Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                    <% const productsPerPage = 3; %>
+                    <% const totalPages = Math.ceil(products.length / productsPerPage); %>
+                    <% const currentPage = parseInt(req.query.page, 10) || 1; %>
+                    <% const startIndex = (currentPage - 1) * productsPerPage; %>
+                    <% const endIndex = startIndex + productsPerPage; %>
+                
+                    <% const displayedProducts = products.slice(startIndex, endIndex); %>
+                
+                    <% for (let i = 0; i < displayedProducts.length; i++) { %>
+                      <tr>
+                        <td><%= i + 1 + (currentPage - 1) * productsPerPage %></td>
+                        <td><%= displayedProducts[i].name %></td>
+                        <td><%= displayedProducts[i].category ? displayedProducts[i].category.name : 'N/A' %></td>
+                        <td><%= displayedProducts[i].brand %></td>
+                        <td><%= displayedProducts[i].stock %></td>
+                
+                        <td>
+                          <% if (displayedProducts[i].offer && displayedProducts[i].offer.status === 'active') { %>
+                              <s><%= displayedProducts[i].price %></s>
+                          <% } else { %>
+                              <%= displayedProducts[i].price %>
+                          <% } %>
+                        </td>
+                        <td class="description-cell">
+                          <%= displayedProducts[i].description %>
+                        </td>
+                        <td>
+                          <% displayedProducts[i].images.forEach(function (imagePath) { %>
+                            <img src="<%= imagePath %>" alt="productImage">
+                          <% }); %>
+                        </td>
+                        <td style="width: 50px;">
+                          <a href="/admin/editproduct/<%= displayedProducts[i].id %>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons" style="color: #FFC107; padding: 0px 10px;">&#xE254;</i></a>
+                          <a class="delete" title="Delete" data-toggle="tooltip" onclick="deletebyProduct('<%= displayedProducts[i].id %>')">
+                            <i class="material-icons" style="color: #E34724; padding: 0px 10px;">&#xE872;</i>
+                          </a>
+                        </td>
+                      </tr>
+                    <% } %>
+                 
+                </tbody>
+                
+                
+              </table>
+             
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <% for (let i = 1; i <= totalPages; i++) { %>
+                    <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                      <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                    </li>
+                  <% } %>
+                </ul>
+              </nav>
+            
+            </div>
+            
+          </div>
+        </div>
+      </div>
+   </div>
+  </div>
+</div>
+<script src="/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/vendors/chart.js/Chart.min.js"></script>
+  <!-- <script src="/vendors/datatables.net/jquery.dataTables.js"></script> -->
+  <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="/js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/js/off-canvas.js"></script>
+  <script src="/js/hoverable-collapse.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/settings.js"></script>
+  <script src="/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/Chart.roundedBarCharts.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+  async function deletebyProduct(productId) {
+    // Use Swal.fire for confirmation
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete this file?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`/admin/deleteproduct/${productId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (response.ok) {
+            // Handle success, if needed
+            console.log('Product deleted successfully');
+
+            // Redirect to the product page
+            window.location.href = '/admin/products';
+          } else {
+            // Handle error
+            console.error('Error deleting product');
+          }
+        } catch (error) {
+          // Handle network or other errors
+          console.error(error);
+        }
+      }
+    });
+  }
+</script>
+</html>

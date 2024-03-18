@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Link jQuery from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Link Bootstrap CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Link Bootstrap JS (including Popper.js) from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<style>
+    .card {
+  width: 350px;
+  padding: 10px;
+  border-radius: 20px;
+  background: #fff;
+  border: none;
+  height: 350px;
+  position: relative;
+}
+
+.container {
+  height: 100vh;
+}
+
+body {
+  background: #eee;
+}
+
+.mobile-text {
+  color: #989696b8;
+  font-size: 15px;
+}
+
+.form-control {
+  margin-right: 12px;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ff8880;
+  outline: 0;
+  box-shadow: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+</style>
+
+
+<body>
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Email verification</h5>
+            <span class="mobile-text">Enter the code we just sent on your Mail-ID <b class="text-danger"><%= email %></b></span>
+            <form id="otpForm" action="/verifyotp" method="POST" autocomplete="off">
+                    <div class="d-flex flex-row mt-5">
+                    <input type="hidden" name="email" value="<%= email %>">
+                    <input type="text" class="form-control" maxlength="1" oninput="validateInput(this)" name="value">
+                    <input type="text" class="form-control" maxlength="1" oninput="validateInput(this)" name="value">
+                    <input type="text" class="form-control" maxlength="1" oninput="validateInput(this)" name="value">
+                    <input type="text" class="form-control" maxlength="1" oninput="validateInput(this)" name="value">
+                </div>
+                <% if (typeof error !== 'undefined' && error) { %>
+                  <div class="text-danger mt-2"><%= error %></div>
+                <% } %>
+                  </form>
+            <div class="text-center mt-5">
+                <span class="d-block mobile-text">Don't receive the code?</span>
+                <span class="font-weight-bold text-danger cursor" id="resendLink">Resend</span>
+                <form id="resendForm" action="/resendotp" method="POST" style="display: none;">
+                  <input type="hidden" name="userId" value="<%= email %>">
+              </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    document.getElementById('resendLink').addEventListener('click', function () {
+        // Submit the hidden form when the link is clicked
+        document.getElementById('resendForm').submit();
+    });
+
+    
+    function validateInput(input) {
+        // Allow only one number
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+        // Move to the next input if the current one is filled
+        if (input.value && input.nextElementSibling) {
+            input.nextElementSibling.focus();
+        }
+
+        // Check if all inputs are filled
+        const allInputsFilled = Array.from(document.querySelectorAll('.form-control')).every(input => input.value);
+
+        if (allInputsFilled) {
+            // All inputs are filled, submit the form
+            document.getElementById('otpForm').submit();
+            // You can also add redirection logic here
+            
+        }
+    }
+
+    function resendCode() {
+        // Add logic to resend the code
+        console.log('Resending code...');
+    }
+   
+
+
+</script>
+
+</html>

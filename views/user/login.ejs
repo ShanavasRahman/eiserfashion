@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.2/components/logins/login-12/assets/css/login-12.css">
+    <title>Document</title>
+</head>
+<body>`
+    <!-- Login 12 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-5">
+            <h2 class="display-5 fw-bold text-center" style="color: rgb(103, 102, 102);">Sign In</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8">
+          <div class="row gy-5 justify-content-center">
+
+            <div class="col-12 col-lg-5">
+              <form action="/login" method="post" onsubmit="return validateForm() && validatePassForm()">
+                <div class="row gy-3 overflow-hidden">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control border-0 border-bottom rounded-0" name="email" id="email" placeholder="name@example.com" required>
+                            <label for="email" class="form-label">Email</label>
+                            <span id="emailError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-floating mb-3">
+                        <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" id="password" value="" placeholder="Password" required>
+                        <label for="password" class="form-label">Password</label>
+                        <span id="passwordError" class="text-danger"></span>
+                        <div class="password-toggle">
+                          <input type="checkbox" onclick="togglePasswordVisibility()" id="togglePassword">
+                          <label for="togglePassword">Show Password</label>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row justify-content-between" style="justify-content: end !important;">
+                            <div class="col-6">
+                                <div class="text-end">
+                                    <a href="/forgotPass" class="link-secondary text-decoration-none" style="padding: 0;">Forgot password?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid">
+                            <button class="btn btn-lg btn rounded-10 fs-6" type="submit" style="background-color: #71cd14;color: #fff;font-weight: 700;">Log In</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center m-0" style="padding: 20px;">Don't have an account? <a href="/signup" style="text-decoration: none; color: rgb(26, 42, 164); font-weight: 700; font-size: 18px;">Sign Up</a></p>
+    <p class="text-center" style="color: red;"><% if (typeof message !== 'undefined') { %>
+      <%= message %>
+    <% } %></p>
+  </section>
+</body>
+<script>
+  // Place your JavaScript code here
+  function validateForm() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // Reset error messages
+    document.getElementById('emailError').innerText = '';
+    document.getElementById('passwordError').innerText = '';
+
+    // Perform validation
+    if (email.trim() === '') {
+        document.getElementById('emailError').innerText = 'Email is required';
+        return false;
+    }
+
+    // You can add more sophisticated email validation if needed
+
+    if (password.trim() === '') {
+        document.getElementById('passwordError').innerText = 'Password is required';
+        return false;
+    }
+
+    return true; // Submit the form if validation passes
+  }
+
+  function togglePasswordVisibility() {
+    var passwordInput = document.getElementById('password');
+    var togglePassword = document.getElementById('togglePassword');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
+
+    // Update the label text based on the input type
+    togglePassword.checked ? togglePassword.labels[0].innerText = 'Hide Password' : togglePassword.labels[0].innerText = 'Show Password';
+  }
+
+  function validatePassForm() {
+    var passwordInput = document.getElementById('password');
+    var passwordError = document.getElementById('passwordError');
+
+    // Check for spaces
+    if (/\s/.test(passwordInput.value)) {
+      passwordError.innerText = 'Password cannot contain spaces.';
+      return false; // Prevent form submission
+    } else {
+      passwordError.innerText = ''; // Clear error message
+      return true; // Allow form submission
+    }
+  }
+</script>
+
+</html>

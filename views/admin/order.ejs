@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Skydash Admin</title>
+  <!-- plugins:css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/vendors/feather/feather.css">
+  <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/images/favicon.png" />
+<!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+    .apply-return-request-button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .apply-return-request-button:hover {
+        background-color: #45a049; /* Darker Green */
+    }
+    /* CSS for the "View" button */
+.view-btn {
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #007bff; /* Button color */
+    color: #fff; /* Text color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-btn:hover {
+    background-color: #0056b3; /* Hover color */
+}
+
+</style>
+
+<body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <%- include('partials/_navbar'); %>   
+       <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="ti-settings"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close ti-close"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+            <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default"></div>
+            </div>
+          </div>
+        </div>
+        <div id="right-sidebar" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="setting-content">
+            <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+              <div class="add-items d-flex px-3 mb-0">
+                <form class="form w-100">
+                  <div class="form-group d-flex">
+                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                    <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                  </div>
+                </form>
+              </div>
+              <div class="list-wrapper px-3">
+                <ul class="d-flex flex-column-reverse todo-list">
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Team review meeting at 3.00 PM
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Prepare for presentation
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox">
+                        Resolve all the low priority tickets due today
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li class="completed">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox" checked>
+                        Schedule meeting for next week
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                  <li class="completed">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="checkbox" type="checkbox" checked>
+                        Project review
+                      </label>
+                    </div>
+                    <i class="remove ti-close"></i>
+                  </li>
+                </ul>
+              </div>
+              <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
+              <div class="events pt-4 px-3">
+                <div class="wrapper d-flex mb-2">
+                  <i class="ti-control-record text-primary mr-2"></i>
+                  <span>Feb 11 2018</span>
+                </div>
+                <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+                <p class="text-gray mb-0">The total number of sessions</p>
+              </div>
+              <div class="events pt-4 px-3">
+                <div class="wrapper d-flex mb-2">
+                  <i class="ti-control-record text-primary mr-2"></i>
+                  <span>Feb 7 2018</span>
+                </div>
+                <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                <p class="text-gray mb-0 ">Call Sarah Graves</p>
+              </div>
+            </div>
+            <!-- To do section tab ends -->
+            <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+              <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+                <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
+              </div>
+              <ul class="chat-list">
+                <li class="list active">
+                  <div class="profile"><img src="/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Thomas Douglas</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">19 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                  <div class="info">
+                    <div class="wrapper d-flex">
+                      <p>Catherine</p>
+                    </div>
+                    <p>Away</p>
+                  </div>
+                  <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                  <small class="text-muted my-auto">23 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Daniel Russell</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">14 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                  <div class="info">
+                    <p>James Richardson</p>
+                    <p>Away</p>
+                  </div>
+                  <small class="text-muted my-auto">2 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Madeline Kennedy</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">5 min</small>
+                </li>
+                <li class="list">
+                  <div class="profile"><img src="/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                  <div class="info">
+                    <p>Sarah Graves</p>
+                    <p>Available</p>
+                  </div>
+                  <small class="text-muted my-auto">47 min</small>
+                </li>
+              </ul>
+            </div>
+            <!-- chat tab ends -->
+          </div>
+        </div>
+        <!-- partial -->
+  
+  
+  
+        <!-- partial:partials/_sidebar.html -->
+        <%- include('partials/_sidebar'); %>
+        <!-- partial -->
+
+
+
+
+
+
+        <div class="col-lg-10 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Orders</h4>
+
+                    <div class="table-responsive pt-3">
+                      <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Products</th>
+                                <th>Ordered product view</th>
+                                <th>Amount</th>
+                                <th>Order Status</th>
+                                <th>Payment Status</th>
+                                <th>Delivery Status</th>
+                                <th>Return Request</th>
+                                <th>Return Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% orders.forEach(order => { %>
+                                <tr>
+                                    <td><%= order._id %></td>
+                                    <td><%= order.user.name %></td>
+                                    <td><%= order.user.email %></td>
+                                    <td>
+                                      <% order.products.forEach(product => { %>
+                                          <% if (product.product) { %>
+                                              <i class="bi bi-dot"></i><%= product.product.name %>
+                                              <br><br>
+                                          <% } %>
+                                      <% }); %>
+                                  </td>
+                                  <td class="text-center"><button class="btn btn-primary view-btn" onclick="viewOrderDetails('<%= order._id %>')">View</button>
+                                  </td>
+                                  
+                                    <td>₹ <%= order.totalAmount.toFixed(2) %></td>
+                                    <td><%= order.status %></td>
+                                    <td>
+                                      <% if (order.paymentMethod === 'Razorpay') { %>
+                                        Payment Completed
+                                      <% } else if (order.paymentMethod === 'Cash on Delivery' && order.status === 'Delivered') { %>
+                                        <% if (order.products.some(product => product.returnRequested === 'Completed')) { %>
+                                          Product Returned
+                                        <% } else { %>
+                                          Completed
+                                        <% } %>
+                                      <% } else { %>
+                                        Pending
+                                      <% } %>
+                                    </td>
+                                    
+                                    <td>
+                                        <select onchange="editOrderStatus('<%= order._id %>', this.value)" class="form-control">
+                                            <option value="Processing" <%= order.status === 'Processing' ? 'selected' : '' %>>Processing</option>
+                                            <option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                            <option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                            <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <%= order.returnRequested %>
+                                    </td>
+                                    
+                                    <td class="return-request-cell">
+                                      <form id="applyReturnRequestForm_<%= order._id %>" action="/admin/updateReturnStatus" method="POST" onsubmit="applyReturnRequest(event, '<%= order._id %>')">
+                                          <select class="return-request-select" name="returnRequestStatus" id="returnRequest_<%= order._id %>">
+                                              <option value="Nil" <%= order.returnRequested === 'Nil' ? 'selected' : '' %>>Nil</option>
+                                              <option value="Pending" <%= order.returnRequested === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                              <option value="Approved" <%= order.returnRequested === 'Approved' ? 'selected' : '' %>>Approved</option>
+                                              <option value="Rejected" <%= order.returnRequested === 'Rejected' ? 'selected' : '' %>>Rejected</option>
+                                              <option value="Completed" <%= order.returnRequested === 'Completed' ? 'selected' : '' %>>Completed</option>
+                                          </select>
+                                          <input type="hidden" name="orderId" value="<%= order._id %>">
+                                          <button class="apply-return-request-button" type="submit">Apply</button>
+                                      </form>
+                                  </td>
+                                  
+                                    
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script>
+            function editOrderStatus(orderId, newStatus) {
+               console.log("hello");
+                // Example using Fetch API
+                fetch(`/admin/updateOrderStatus/${orderId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ newStatus }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response from the server
+                    if (data.success) {
+                        // Optionally update the UI or show a success message
+                        window.location.href("/admin/orders");
+                    } else {
+                        // Handle the error, if any
+                        console.error('Error updating order status:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating order status:', error);
+                });
+            }
+        </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function applyReturnRequest(event, orderId) {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const form = document.getElementById(`applyReturnRequestForm_${orderId}`);
+        
+        // Fetch API to submit the form data asynchronously
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                orderId: orderId,
+                returnRequestStatus: document.getElementById(`returnRequest_${orderId}`).value
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Success message with SweetAlert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Return request status updated successfully',
+                    showConfirmButton: false,
+                    timer: 1500 // Close after 1.5 seconds
+                });
+                // Reload the page after a short delay
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500); // 1500 milliseconds = 1.5 seconds
+            } else {
+                // Error message with SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to update return request status',
+                    text: 'An error occurred. Please try again.',
+                    showConfirmButton: true
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error updating return request status:', error);
+            // Error message with SweetAlert
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'An error occurred. Please try again.',
+                showConfirmButton: true
+            });
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/vendors/chart.js/Chart.min.js"></script>
+  <!-- <script src="/vendors/datatables.net/jquery.dataTables.js"></script> -->
+  <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="/js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/js/off-canvas.js"></script>
+  <script src="/js/hoverable-collapse.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/settings.js"></script>
+  <script src="/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/Chart.roundedBarCharts.js"></script>
+</body>

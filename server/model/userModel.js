@@ -56,7 +56,9 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Transaction'
         }]
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 

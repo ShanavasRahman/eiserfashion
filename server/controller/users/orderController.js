@@ -22,7 +22,6 @@ const createOrder = async (req, res) => {
 
       const orderProducts = [];
 
-      // Deduct from the wallet if it's used
       if (useWallet) {
           if (user.wallet.balance < walletAmount) {
               return res.status(400).json({ success: false, error: "Insufficient funds in the wallet" });
@@ -63,10 +62,8 @@ const createOrder = async (req, res) => {
               return res.status(400).json({ success: false, errors: productValidationErrors });
           }
 
-          // Remove items from the user's cart
           await User.findByIdAndUpdate(userId, { $pull: { cart: { product: { $in: orderProducts.map(p => p.product) } } } });
       } else {
-          // Process single product order
           const productId = products[0].product;
           const quantity = parseInt(products[0].quantity, 10);
 
@@ -98,9 +95,9 @@ const createOrder = async (req, res) => {
       const order = new Order({
           user: userId,
           products: orderProducts,
-          totalAmount: originalAmount, // Use the original amount for recording purposes
-          orderDate: moment(), // Use moment.js to get the current date
-          deliveryDate: calculateDeliveryDate(), // You can also use moment.js for delivery date
+          totalAmount: originalAmount, 
+          orderDate: moment(), 
+          deliveryDate: calculateDeliveryDate(), 
           paymentMethod,
           deliveryAddress: selectedAddress,
           status: "Processing",
@@ -179,15 +176,11 @@ const cancelOrder = async (req, res) => {
       }
 
       if (order.status !== "Delivered") {
-          // Initialize variable for refund amount
           let refundAmount = 0;
 
-          // Check if the payment method is Razorpay
           if (order.paymentMethod === 'Razorpay') {
-              // Refund the entire amount to the wallet
               refundAmount = order.totalAmount;
           } else {
-              // Fetch the wallet transaction for this order
               const walletTransaction = await Transaction.findOne({
                   orderId: orderId,
               });
@@ -197,11 +190,9 @@ const cancelOrder = async (req, res) => {
                   return res.status(500).json({ error: "Wallet transaction not found" });
               }
 
-              // Refund the wallet amount
               refundAmount = walletTransaction.amount * -1;
           }
 
-          // Refund the amount to the user's wallet
           const user = await User.findById(order.user);
           if (!user) {
               return res.status(404).json({ error: "User not found" });
@@ -210,7 +201,6 @@ const cancelOrder = async (req, res) => {
           user.wallet.balance += refundAmount;
           await user.save();
 
-          // Create a new transaction for the refund
         const refundTransaction = new Transaction({
           userId: order.user,
           orderId: order._id,
@@ -218,10 +208,8 @@ const cancelOrder = async (req, res) => {
           description: 'Refund from cancelled order',
         });
 
-          // Save the refund transaction
           await refundTransaction.save();
 
-          // Update order status to Cancelled
           order.status = "Cancelled";
           await order.save();
 

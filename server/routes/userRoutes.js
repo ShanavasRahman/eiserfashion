@@ -21,7 +21,8 @@ router.get("/signup", loginController.loadSignup) ;
 router.get("/home", authController.isLogin,authentication.is_blocked, mainController.loadHome);
 router.get("/logout", loginController.userLogout);
 router.get('/singleProduct', mainController.singleProduct);
-router.get('/forgotPass', authController.isLogout,mainController.loadForgot);
+router.get('/forgotPass', authController.isLogout, mainController.loadForgot);
+router.get('/resetPassword', mainController.resetPassword);
 router.get("/otp", loginController.loadOtp);
 router.get('/profile', authController.isLogin, authentication.is_blocked, profileController.loadProfile);
 router.get('/cart', authController.isLogin, authentication.is_blocked, cartController.loadCart);
@@ -38,7 +39,10 @@ router.post('/cancelOrder', authController.isLogin, authentication.is_blocked, o
 router.post('/returnReq', authController.isLogin, authentication.is_blocked, orderController.returnReq);
 
 router.post("/verifyotp",authController.isLogout, loginController.verifyOTP);
-router.post("/forgotPass",authController.isLogout, mainController.forgotPass);
+router.post("/forgotPass", authController.isLogout, mainController.forgotPass);
+router.post("/updatePassword", authController.isLogout, mainController.updatePassword);
+
+
 router.post("/addAddress", authController.isLogin, authentication.is_blocked, profileController.addAddress);
 router.post("/updateAddress", authController.isLogin, authentication.is_blocked, profileController.updateAddress);
 router.post("/deleteAddress", authController.isLogin, authentication.is_blocked, profileController.deleteAddress);

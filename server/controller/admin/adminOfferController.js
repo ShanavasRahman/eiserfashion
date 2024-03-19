@@ -26,8 +26,9 @@ const loadOffer = async (req, res) => {
 
 
 
-const addOffer=async (req, res) => {
+const addOffer = async (req, res) => {
     try {
+        console.log(req.body);
         const {
             description,
             discountType,
@@ -38,20 +39,58 @@ const addOffer=async (req, res) => {
             conditions
         } = req.body;
 
+        const numericDiscountAmount = parseFloat(discountAmount);
+        const numericUsageLimit = parseInt(usageLimit);
+
+        // Convert string values to dates
+        const start = new Date(validityPeriodStart);
+        const end = new Date(validityPeriodEnd);
+
+        // Validate description
+        if (!description || description.trim() === '') {
+            return res.status(400).json({ error: 'Description is required' });
+        }
+
+        // Validate discountType
+        if (discountType !== 'Percentage' && discountType !== 'Fixed amount') {
+            return res.status(400).json({ error: 'Invalid discount type' });
+        }
+
+        // Validate discountAmount
+        if (isNaN(numericDiscountAmount) || numericDiscountAmount <= 0) {
+            return res.status(400).json({ error: 'Invalid discount amount' });
+        }
+
+        // Validate usageLimit
+        if (isNaN(numericUsageLimit) || numericUsageLimit < 0) {
+            return res.status(400).json({ error: 'Invalid usage limit' });
+        }
+
+        // Validate validityPeriodStart and validityPeriodEnd
+        if (!start || !end || start >= end) {
+            return res.status(400).json({ error: 'Invalid validity period' });
+        }
+
+        if (discountType === 'Percentage' && (numericDiscountAmount <= 0 || numericDiscountAmount > 100)) {
+            return res.status(400).json({ error: 'Discount percentage must be between 0 and 100' });
+        }
+
+        // Create a new offer object
         const newOffer = new Offer({
             description,
             discountType,
-            discountAmount,
-            usageLimit,
+            discountAmount: numericDiscountAmount,
+            usageLimit: numericUsageLimit,
             validityPeriod: {
-                start: validityPeriodStart,
-                end: validityPeriodEnd
+                start,
+                end
             },
             conditions
         });
 
         // Save the new offer to the database
         const savedOffer = await newOffer.save();
+        console.log(savedOffer);
 
         // Send a success response
         res.status(201).json(savedOffer);
@@ -60,7 +99,9 @@ const addOffer=async (req, res) => {
         console.error('Error adding offer:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
+
+
 
 const applyCategoryOffer = async (req, res) => {
     try {

@@ -361,49 +361,59 @@
       
 
       <script>
-        $(document).ready(function() {
-          $('#openModalBtn').click(function() {
-            $('#addOfferModal').modal('show');
-          });
-          
-          $('#submitOffer').click(function() {
-            // Serialize form data
-            const formData = $('#addOfferForm').serialize();
-        
-            // Make POST request using fetch
-            fetch('/admin/addOffer', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: formData
-            })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then(data => {
-              // Handle success
-              console.log('Success:', data);
-              // Show SweetAlert
-              Swal.fire({
-                title: 'Success!',
-                text: 'Offer created successfully.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-              });
-            })
-            .catch(error => {
-              // Handle error
-              console.error('Error:', error);
-            });
-        
-            // Close the modal
-            $('#addOfferModal').modal('hide');
-          });
-        });
+$(document).ready(function() {
+  $('#openModalBtn').click(function() {
+    $('#addOfferModal').modal('show');
+  });
+  
+  $('#submitOffer').click(function() {
+    // Serialize form data
+    const formData = $('#addOfferForm').serialize();
+
+    // Make POST request using fetch
+    fetch('/admin/addOffer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle success
+      console.log('Success:', data);
+      // Show SweetAlert for success
+      Swal.fire({
+        title: 'Success!',
+        text: 'Offer created successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error:', error);
+      // Display the error message from the backend, if available
+      const errorMessage = error.response ? error.response.data.error : 'An error occurred while processing your request. Please try again later.';
+      // Show SweetAlert for error
+      Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    });
+
+    // Close the modal
+    $('#addOfferModal').modal('hide');
+  });
+});
+
       </script>
 
 
